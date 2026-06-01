@@ -1,0 +1,15 @@
+{
+	"name": "adf-nycpayroll",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2bbf9ed2-0024-4046-81c4-d80918d2ed11",
+		"tenantId": "f958e84a-92b8-439f-a62d-4f45996b6d07"
+	}
+}
