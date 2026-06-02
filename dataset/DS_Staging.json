@@ -9,9 +9,9 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "AzureBlobFSLocation",
 				"folderPath": "dirstaging",
-				"container": "nycpayrollfs"
+				"fileSystem": "nycpayrollfs"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

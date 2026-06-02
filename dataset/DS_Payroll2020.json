@@ -9,10 +9,10 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": "nycpayroll_2020.csv",
 				"folderPath": " dirhistoryfiles ",
-				"container": "nycpayrollfs"
+				"fileSystem": "nycpayrollfs"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

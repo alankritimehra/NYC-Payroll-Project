@@ -9,10 +9,10 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "AzureBlobFSLocation",
 				"fileName": "AgencyMaster.csv",
 				"folderPath": "dirpayrollfiles ",
-				"container": "nycpayrollfs"
+				"fileSystem": "nycpayrollfs"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
