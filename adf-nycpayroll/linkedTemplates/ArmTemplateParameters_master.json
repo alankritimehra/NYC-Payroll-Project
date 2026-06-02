@@ -5,11 +5,14 @@
 		"factoryName": {
 			"value": "adf-nycpayroll"
 		},
-		"ls_adls_payroll_connectionString": {
+		"ls_adls_payroll_accountKey": {
 			"value": ""
 		},
 		"ls_sql_payroll_connectionString": {
 			"value": ""
+		},
+		"ls_adls_payroll_properties_typeProperties_url": {
+			"value": "https://adlsnycpayroll151.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"value": ""

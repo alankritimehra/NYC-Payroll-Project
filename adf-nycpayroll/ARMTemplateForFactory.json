@@ -7,13 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-nycpayroll"
 		},
-		"ls_adls_payroll_connectionString": {
+		"ls_adls_payroll_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_adls_payroll'"
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_payroll'"
 		},
 		"ls_sql_payroll_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sql_payroll'"
+		},
+		"ls_adls_payroll_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsnycpayroll151.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -284,10 +288,10 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
+						"type": "AzureBlobFSLocation",
 						"fileName": "AgencyMaster.csv",
 						"folderPath": "dirpayrollfiles ",
-						"container": "nycpayrollfs"
+						"fileSystem": "nycpayrollfs"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -322,10 +326,10 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
+						"type": "AzureBlobFSLocation",
 						"fileName": "EmpMaster.csv",
 						"folderPath": "dirpayrollfiles ",
-						"container": "nycpayrollfs"
+						"fileSystem": "nycpayrollfs"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -364,10 +368,10 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
+						"type": "AzureBlobFSLocation",
 						"fileName": "nycpayroll_2020.csv",
 						"folderPath": " dirhistoryfiles ",
-						"container": "nycpayrollfs"
+						"fileSystem": "nycpayrollfs"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -470,10 +474,10 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
+						"type": "AzureBlobFSLocation",
 						"fileName": "nycpayroll_2021.csv",
 						"folderPath": "dirpayrollfiles ",
-						"container": "nycpayrollfs"
+						"fileSystem": "nycpayrollfs"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -918,9 +922,9 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
+						"type": "AzureBlobFSLocation",
 						"folderPath": "dirstaging",
-						"container": "nycpayrollfs"
+						"fileSystem": "nycpayrollfs"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -946,10 +950,10 @@
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobStorageLocation",
+						"type": "AzureBlobFSLocation",
 						"fileName": "TitleMaster.csv",
 						"folderPath": "dirpayrollfiles ",
-						"container": "nycpayrollfs"
+						"fileSystem": "nycpayrollfs"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -977,9 +981,13 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"type": "AzureBlobStorage",
+				"type": "AzureBlobFS",
 				"typeProperties": {
-					"connectionString": "[parameters('ls_adls_payroll_connectionString')]"
+					"url": "[parameters('ls_adls_payroll_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('ls_adls_payroll_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -1486,6 +1494,9 @@
 						"     errorHandlingOption: 'stopOnFirstError') ~> SQLSummarySink",
 						"aggregatepayroll sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
+						"     umask: 0022,",
+						"     preCommands: [],",
+						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> StageSink"
 					]

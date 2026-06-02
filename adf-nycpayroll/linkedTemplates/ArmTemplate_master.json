@@ -7,13 +7,17 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-nycpayroll"
 		},
-		"ls_adls_payroll_connectionString": {
+		"ls_adls_payroll_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'ls_adls_payroll'"
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_payroll'"
 		},
 		"ls_sql_payroll_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_sql_payroll'"
+		},
+		"ls_adls_payroll_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsnycpayroll151.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -42,11 +46,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"ls_adls_payroll_connectionString": {
-						"value": "[parameters('ls_adls_payroll_connectionString')]"
+					"ls_adls_payroll_accountKey": {
+						"value": "[parameters('ls_adls_payroll_accountKey')]"
 					},
 					"ls_sql_payroll_connectionString": {
 						"value": "[parameters('ls_sql_payroll_connectionString')]"
+					},
+					"ls_adls_payroll_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_payroll_properties_typeProperties_url')]"
 					}
 				}
 			},
